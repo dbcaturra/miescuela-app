@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -65,6 +66,16 @@ public final class LmsActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 setContentView(mWebView);
+            }
+        });
+
+        mWebView.setDownloadListener(new DownloadListener() {
+            public void onDownloadStart(String url, String userAgent,
+                                        String contentDisposition, String mimetype,
+                                        long contentLength) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
 

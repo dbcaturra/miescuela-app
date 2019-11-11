@@ -1,29 +1,37 @@
-<!doctype html>
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset=utf-8 />
+    <title>videojs-contrib-hls embed</title>
 
-    <title>Miescuela streamming application</title>
-    <meta name="description" content="ME streamming app">
-    <meta name="author" content="diego beltran">
-    <link rel="stylesheet" href="file:///android_asset/styles.css">
+    <!--
+
+    Uses the latest versions of video.js and videojs-http-streaming.
+
+    To use specific versions, please change the URLs to the form:
+
+    <link href="https://unpkg.com/video.js@6.7.1/dist/video-js.css" rel="stylesheet">
+    <script src="https://unpkg.com/video.js@6.7.1/dist/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming@0.9.0/dist/videojs-http-streaming.js"></script>
+
+    -->
+
+    <link href="file:///android_asset/video-js.css" rel="stylesheet">
+    <link href="file:///android_asset/style.css" rel="stylesheet">
 </head>
-
 <body>
-<script src="file:///android_asset/flv.js"></script>
-<video with="90%" id="videoElement"></video>
+<h1>miescuela streaming</h1>
+
+<video-js id="my_video_1" class="vjs-default-skin" controls preload="auto" width="600" height="250">
+    <source src="http://192.168.43.1:8000/live/mp4:stream.mp4/index.m3u8" type="application/x-mpegURL">
+</video-js>
+
+<script src="file:///android_asset/video.js"></script>
+<script src="file:///android_asset/videojs-http-streaming.js"></script>
+
 <script>
-    if (flvjs.isSupported()) {
-        var videoElement = document.getElementById('videoElement');
-        var flvPlayer = flvjs.createPlayer({
-            type: 'flv',
-            url: 'ws://192.168.43.1/live/stream.mp4'
-        });
-        flvPlayer.attachMediaElement(videoElement);
-        flvPlayer.load();
-        flvPlayer.play();
-    }
-</script>
+    var player = videojs('my_video_1');
+  </script>
+
 </body>
 </html>

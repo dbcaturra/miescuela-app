@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -32,8 +33,13 @@ public final class BroadcastActivity extends Activity {
 
         mWebView = new WebView(this);
         WebSettings settings = mWebView.getSettings();
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setAppCacheEnabled(false);
+        settings.setJavaScriptEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        settings.setDomStorageEnabled(true);
+        settings.setAppCacheEnabled(true);
+        settings.setBuiltInZoomControls(true);
+        mWebView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+        mWebView.setWebChromeClient(new WebChromeClient());
         setContentView(progressLayout);
         mWebView.clearCache(true);
 
